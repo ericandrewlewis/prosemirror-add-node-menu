@@ -1,0 +1,14 @@
+{
+  "name": "add-node-ui",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "buble -i src -o dist"
+  },
+  "dependencies": {
+    "buble": "^0.14.2",
+    "prosemirror-state": "^0.12.0",
+    "prosemirror-view": "^0.12.2"
+  }
+}
