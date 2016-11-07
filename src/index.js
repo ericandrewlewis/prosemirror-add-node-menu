@@ -10,23 +10,8 @@ class AddNodeMenuState {
   }
 }
 
-const addNodeMenuKey = new PluginKey("add-node-menu")
-
 const selectionInEmptyTextNode = (selection) => {
-  if (!selection instanceof TextSelection) {
-    return false;
-  }
-  if (selection.$from.parent.nodeSize !== 2) {
-    return false;
-  }
-  return true;
-}
-
-/**
- * Show the Add Node Menu when the selection is in an empty text node.
- */
-const showNodeMenu = (doc, selection) => {
-  return selectionInEmptyTextNode(selection);
+  return selection.empty && selection.$from.parent.content.size === 0;
 }
 
 const getDecorationsForSelection = (doc, selection) => {
@@ -58,25 +43,24 @@ const getDecorationsForSelection = (doc, selection) => {
   return DecorationSet.create(doc, decos)
 }
 
+const decorationsForState = (state) => {
+  return selectionInEmptyTextNode(state.selection) ? getDecorationsForSelection(state.doc, state.selection) : DecorationSet.empty
+}
+
 function addNodeMenu() {
   return new Plugin({
-    key: addNodeMenuKey,
+    key: 'add-node-menu',
 
     state: {
-      init() {
-        return new AddNodeMenuState(DecorationSet.empty)
+      init(config, state) {
+        return new decorationsForState(state)
       },
-      applyAction(action, addNodeMenuState, state) {
-        if (action.type == "selection") {
-          let decos
-          if (showNodeMenu(state.doc, action.selection)) {
-            decos = getDecorationsForSelection(state.doc, action.selection)
-          } else {
-            decos = DecorationSet.empty
-          }
-          return new AddNodeMenuState(decos)
+      applyAction(action, addNodeMenuState, oldState, newState) {
+        if (action.type === "selection" || action.type === "transform") {
+          return new AddNodeMenuState(decorationsForState(newState))
+        } else {
+          return addNodeMenuState
         }
-        return addNodeMenuState
       }
     },
     props: {

@@ -7,7 +7,6 @@ var PluginKey = ref.PluginKey;
 var ref$1 = require("prosemirror-view");
 var Decoration = ref$1.Decoration;
 var DecorationSet = ref$1.DecorationSet;
-var crel = require("crel")
 
 // The value of the state field that tracks undo/redo history for that
 // state. Will be stored in the plugin state when the history plugin
@@ -16,23 +15,8 @@ var AddNodeMenuState = function AddNodeMenuState(decorations) {
   this.deco = decorations
 };
 
-var addNodeMenuKey = new PluginKey("add-node-menu")
-
 var selectionInEmptyTextNode = function (selection) {
-  if (!selection instanceof TextSelection) {
-    return false;
-  }
-  if (selection.$from.parent.nodeSize !== 2) {
-    return false;
-  }
-  return true;
-}
-
-/**
- * Show the Add Node Menu when the selection is in an empty text node.
- */
-var showNodeMenu = function (doc, selection) {
-  return selectionInEmptyTextNode(selection);
+  return selection.empty && selection.$from.parent.content.size === 0;
 }
 
 var getDecorationsForSelection = function (doc, selection) {
@@ -64,26 +48,24 @@ var getDecorationsForSelection = function (doc, selection) {
   return DecorationSet.create(doc, decos)
 }
 
+var decorationsForState = function (state) {
+  return selectionInEmptyTextNode(state.selection) ? getDecorationsForSelection(state.doc, state.selection) : DecorationSet.empty
+}
+
 function addNodeMenu() {
   return new Plugin({
-    key: addNodeMenuKey,
+    key: 'add-node-menu',
 
     state: {
-      init: function init() {
-        return new AddNodeMenuState(DecorationSet.empty)
+      init: function init(config, state) {
+        return new decorationsForState(state)
       },
-      applyAction: function applyAction(action, addNodeMenuState, state) {
-        debugger
-        if (action.type == "selection") {
-          var decos
-          if (showNodeMenu(state.doc, action.selection)) {
-            decos = getDecorationsForSelection(state.doc, action.selection)
-          } else {
-            decos = DecorationSet.empty
-          }
-          return new AddNodeMenuState(decos)
+      applyAction: function applyAction(action, addNodeMenuState, oldState, newState) {
+        if (action.type === "selection" || action.type === "transform") {
+          return new AddNodeMenuState(decorationsForState(newState))
+        } else {
+          return addNodeMenuState
         }
-        return addNodeMenuState
       }
     },
     props: {
