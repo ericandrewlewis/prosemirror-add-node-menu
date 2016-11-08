@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 
 // This script builds the ProseMirror packages which don't have a dist/ directory
 // because we're including the latest from Github.
