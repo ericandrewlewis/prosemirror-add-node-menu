@@ -20,31 +20,31 @@ var selectionInEmptyTextNode = function (selection) {
 }
 
 var getDecorationsForSelection = function (doc, selection) {
-  var dom = document.createElement('div')
-  dom.style.width = 0;
-  dom.style.display = 'inline-block';
-  dom.style.overflow = 'visible';
-  dom.style.position = 'relative';
-  dom.style.cursor = 'pointer';
-  var menuCaret = document.createElement('div');
-  menuCaret.style.border = '1px solid black';
-  menuCaret.style.transform = 'rotate(45deg) scale(.5)';
-  menuCaret.style.width = '10px';
-  menuCaret.style.height = '10px';
-  dom.appendChild(menuCaret);
-  menuCaret.style.position = 'absolute';
-  menuCaret.style.left = '2px';
-  menuCaret.style.bottom = 0;
+  // const dom = document.createElement('div')
+  // dom.style.width = 0;
+  // dom.style.display = 'inline-block';
+  // dom.style.overflow = 'visible';
+  // dom.style.position = 'relative';
+  // dom.style.cursor = 'pointer';
+  // const menuCaret = document.createElement('div');
+  // menuCaret.style.border = '1px solid black';
+  // menuCaret.style.transform = 'rotate(45deg) scale(.5)';
+  // menuCaret.style.width = '10px';
+  // menuCaret.style.height = '10px';
+  // dom.appendChild(menuCaret);
+  // menuCaret.style.position = 'absolute';
+  // menuCaret.style.left = '2px';
+  // menuCaret.style.bottom = 0;
   var menu = document.createElement('div');
   menu.innerHTML = 'Insert: Image, HR, Table';
-  menu.style.position = 'absolute';
-  menu.style.left = '7px';
-  menu.style.bottom = '-4px';
+  // menu.style.position = 'absolute';
+  // menu.style.left = '7px';
+  // menu.style.bottom = '-4px';
   menu.style.border = '1px solid black';
   menu.style.padding = '2px';
-  menu.style.width = '200px';
-  dom.appendChild(menu);
-  var decos = [Decoration.widget(selection.$from.pos, dom)]
+  // menu.style.width = '200px';
+  // dom.appendChild(menu);
+  var decos = [Decoration.widget(selection.$from.pos, menu)]
   return DecorationSet.create(doc, decos)
 }
 
@@ -58,7 +58,7 @@ function addNodeMenu() {
 
     state: {
       init: function init(config, state) {
-        return new decorationsForState(state)
+        return new AddNodeMenuState(decorationsForState(state))
       },
       applyAction: function applyAction(action, addNodeMenuState, oldState, newState) {
         if (action.type === "selection" || action.type === "transform") {

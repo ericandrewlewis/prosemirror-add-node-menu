@@ -24,6 +24,17 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
+balanced-match@^0.4.1:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
+
+brace-expansion@^1.0.0:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
+  dependencies:
+    balanced-match "^0.4.1"
+    concat-map "0.0.1"
+
 buble:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/buble/-/buble-0.14.2.tgz#5e2ffd5469693068731d77c9c98909aee61e5e6f"
@@ -46,13 +57,45 @@ chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-crel:
+concat-map@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
+
+crel@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/crel/-/crel-3.0.0.tgz#9aa4ceda6fdc1ce5467bc8e2139b65bc9ae2c0be"
+
+ecstatic@^1.4.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/ecstatic/-/ecstatic-1.4.1.tgz#32cb7b6fa2e290d58668674d115e8f0c3d567d6a"
+  dependencies:
+    he "^0.5.0"
+    mime "^1.2.11"
+    minimist "^1.1.0"
+    url-join "^1.0.0"
 
 escape-string-regexp@^1.0.2:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
+
+extending-char@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/extending-char/-/extending-char-1.0.1.tgz#4c6c0eee3658a49df1600b32fc73876f418c7c6c"
+
+fs.realpath@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+glob@^7.0.5:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.2"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
 
 has-ansi@^2.0.0:
   version "2.0.0"
@@ -60,23 +103,138 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+he@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/he/-/he-0.5.0.tgz#2c05ffaef90b68e860f3fd2b54ef580989277ee2"
+
+inflight@^1.0.4:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
+  dependencies:
+    once "^1.3.0"
+    wrappy "1"
+
+inherits@2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+
 magic-string@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.14.0.tgz#57224aef1701caeed273b17a39a956e72b172462"
   dependencies:
     vlq "^0.2.1"
 
-minimist@^1.2.0:
+mime@^1.2.11:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
+
+minimatch@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.3.tgz#2a4e4090b96b2db06a9d7df01055a62a77c9b774"
+  dependencies:
+    brace-expansion "^1.0.0"
+
+minimist@^1.1.0, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+
+moduleserve:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/moduleserve/-/moduleserve-0.8.0.tgz#7b3865cc827f90085ec3afdba23621181f2dcc17"
+  dependencies:
+    ecstatic "^1.4.0"
+
+once@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
+  dependencies:
+    wrappy "1"
 
 os-homedir@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-homedir/-/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
 
-prosemirror-model@^0.12.0:
+path-is-absolute@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
+
+prosemirror-commands@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-commands/-/prosemirror-commands-0.12.0.tgz#d790fe3dbabb5221e4d87e82834835e0f65881b2"
+  dependencies:
+    extending-char "^1.0.0"
+    prosemirror-model "^0.12.0"
+    prosemirror-state "^0.12.0"
+    prosemirror-transform "^0.12.0"
+
+prosemirror-example-setup:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-example-setup/-/prosemirror-example-setup-0.12.0.tgz#1558baab566c44842a16b4d568ef5bad2c061763"
+  dependencies:
+    prosemirror-commands "^0.12.0"
+    prosemirror-history "^0.12.0"
+    prosemirror-inputrules "^0.12.0"
+    prosemirror-keymap "^0.12.0"
+    prosemirror-menu "^0.12.0"
+    prosemirror-schema-list "^0.12.0"
+    prosemirror-schema-table "^0.12.0"
+    prosemirror-state "^0.12.0"
+
+prosemirror-history@^0.12.0:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/prosemirror-history/-/prosemirror-history-0.12.1.tgz#cbcdb536455b6af36bd2ba3ccced5387e5cfbfe1"
+  dependencies:
+    prosemirror-state "^0.12.0"
+    prosemirror-transform "^0.12.0"
+    rope-sequence "^1.2.0"
+
+prosemirror-inputrules@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-inputrules/-/prosemirror-inputrules-0.12.0.tgz#2e07b5cb1bfc7007c2b51ea5394303204b4b34df"
+  dependencies:
+    prosemirror-state "^0.12.0"
+    prosemirror-transform "^0.12.0"
+
+prosemirror-keymap@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-keymap/-/prosemirror-keymap-0.12.0.tgz#b70645b5d3f5ff4843bc6d26a74fa0022b504221"
+  dependencies:
+    prosemirror-state "^0.12.0"
+    w3c-keyname "^1.1.0"
+
+prosemirror-menu, prosemirror-menu@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-menu/-/prosemirror-menu-0.12.0.tgz#485a1feb0a7cc8b12578ba04222793c8a85c5536"
+  dependencies:
+    crel "^3.0.0"
+    prosemirror-commands "^0.12.0"
+    prosemirror-history "^0.12.0"
+    prosemirror-view "^0.12.0"
+
+prosemirror-model, prosemirror-model@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/prosemirror-model/-/prosemirror-model-0.12.0.tgz#5430c4056f2d3fe87d36de3f73aa9d9d07b0e8a7"
+
+prosemirror-schema-basic:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-basic/-/prosemirror-schema-basic-0.12.0.tgz#9af876f8a915e75ba65847c794eebfc0df9f274e"
+  dependencies:
+    prosemirror-model "^0.12.0"
+
+prosemirror-schema-list, prosemirror-schema-list@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-list/-/prosemirror-schema-list-0.12.0.tgz#d93ba425ed202fc113d7b3388e5d9be1f698c276"
+  dependencies:
+    prosemirror-model "^0.12.0"
+    prosemirror-transform "^0.12.0"
+
+prosemirror-schema-table, prosemirror-schema-table@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-table/-/prosemirror-schema-table-0.12.0.tgz#a665dcb66bbd4c0ff2eac492d82991c6c410b5f3"
+  dependencies:
+    prosemirror-model "^0.12.0"
+    prosemirror-state "^0.12.0"
+    prosemirror-transform "^0.12.0"
 
 prosemirror-state, prosemirror-state@^0.12.0:
   version "0.12.0"
@@ -91,12 +249,22 @@ prosemirror-transform@^0.12.0:
   dependencies:
     prosemirror-model "^0.12.0"
 
-prosemirror-view:
+prosemirror-view, prosemirror-view@^0.12.0:
   version "0.12.2"
   resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-0.12.2.tgz#4a48bfe2ae3119b8c0c79166d7cd73e82284c99d"
   dependencies:
     prosemirror-model "^0.12.0"
     prosemirror-state "^0.12.0"
+
+rimraf:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
+  dependencies:
+    glob "^7.0.5"
+
+rope-sequence@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/rope-sequence/-/rope-sequence-1.2.1.tgz#7da14c04fdc06f60bacdb9d26936c56265ffee2e"
 
 strip-ansi@^3.0.0:
   version "3.0.1"
@@ -108,7 +276,19 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
+url-join@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
+
 vlq@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vlq/-/vlq-0.2.1.tgz#14439d711891e682535467f8587c5630e4222a6c"
+
+w3c-keyname@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/w3c-keyname/-/w3c-keyname-1.1.0.tgz#fc02408bb5f45bb7dcaea12e062de5110faec46b"
+
+wrappy@1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 

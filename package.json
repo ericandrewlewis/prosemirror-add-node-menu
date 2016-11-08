@@ -4,11 +4,25 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "buble -i src -o dist"
+    "demo": "npm run build-dependencies && moduleserve demo --port 9001",
+    "build": "buble -i src -o dist",
+    "build-dependencies": "node build.js"
   },
   "dependencies": {
     "buble": "^0.14.2",
-    "prosemirror-state": "^0.12.0",
-    "prosemirror-view": "^0.12.2"
+    "moduleserve": "^0.8.0",
+    "prosemirror-state": "git+https://github.com/ProseMirror/prosemirror-state.git",
+    "prosemirror-view": "git+https://github.com/ProseMirror/prosemirror-view.git"
+  },
+  "devDependencies": {
+    "buble": "^0.14.2",
+    "prosemirror-example-setup": "git+https://github.com/ProseMirror/prosemirror-example-setup.git",
+    "prosemirror-menu": "git+https://github.com/ProseMirror/prosemirror-menu.git",
+    "prosemirror-model": "git+https://github.com/ProseMirror/prosemirror-model.git",
+    "prosemirror-schema-basic": "git+https://github.com/ProseMirror/prosemirror-schema-basic.git",
+    "prosemirror-schema-list": "git+https://github.com/ProseMirror/prosemirror-schema-list.git",
+    "prosemirror-schema-table": "git+https://github.com/ProseMirror/prosemirror-schema-table.git",
+    "prosemirror-state": "git+https://github.com/ProseMirror/prosemirror-state.git",
+    "rimraf": "^2.5.4"
   }
 }
