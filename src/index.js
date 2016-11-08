@@ -14,20 +14,27 @@ const selectionInEmptyTextNode = (selection) => {
   return selection.empty && selection.$from.parent.content.size === 0;
 }
 
-const getDecorationsForSelection = (doc, selection) => {
+// A decoration should have a way to invoke onAction to update the editor view's state.
+const getDecorationsForState = (state, onAction) => {
   const menu = document.createElement('div');
-  menu.innerHTML = 'Insert: Image, HR, Table';
+  const button = document.createElement('button');
+  button.innerHTML = 'Insert HR';
+  button.addEventListener('mousedown', (event) => {
+    const hr = state.schema.nodes.horizontal_rule;
+    onAction(state.tr.replaceSelection(hr.create()).action());
+  });
+  menu.appendChild(button);
   menu.style.border = '1px solid black';
   menu.style.padding = '2px';
-  const decos = [Decoration.widget(selection.$from.pos, menu)]
-  return DecorationSet.create(doc, decos)
+  const decos = [Decoration.widget(state.selection.$from.pos, menu)]
+  return DecorationSet.create(state.doc, decos)
 }
 
-const decorationsForState = (state) => {
-  return selectionInEmptyTextNode(state.selection) ? getDecorationsForSelection(state.doc, state.selection) : DecorationSet.empty
+const decorationsForState = (state, onAction) => {
+  return selectionInEmptyTextNode(state.selection) ? getDecorationsForState(state, onAction) : DecorationSet.empty
 }
 
-function addNodeMenu() {
+function addNodeMenu(config) {
   return new Plugin({
     key: 'add-node-menu',
 
@@ -37,7 +44,7 @@ function addNodeMenu() {
       },
       applyAction(action, addNodeMenuState, oldState, newState) {
         if (action.type === "selection" || action.type === "transform") {
-          return new AddNodeMenuState(decorationsForState(newState))
+          return new AddNodeMenuState(decorationsForState(newState, config.onAction))
         } else {
           return addNodeMenuState
         }

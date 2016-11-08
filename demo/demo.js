@@ -12,16 +12,18 @@ const demoSchema = new Schema({
   marks: schema.markSpec
 })
 
+function onAction(action) {
+  return view.updateState(view.editor.state.applyAction(action))
+}
+
 let state = EditorState.create({
   doc: DOMParser.fromSchema(demoSchema).parse(document.querySelector("#content")),
-  plugins: exampleSetup({schema: demoSchema}).concat([addNodeMenu()])
-  // plugins: exampleSetup({schema: demoSchema})
+  plugins: exampleSetup({schema: demoSchema}).concat([addNodeMenu({
+    onAction
+  })])
 })
 
 let view = window.view = new MenuBarEditorView(document.querySelector(".full"), {
   state,
-  onAction: action => {
-    // debugger
-    return view.updateState(view.editor.state.applyAction(action))
-  }
+  onAction
 })

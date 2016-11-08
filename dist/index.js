@@ -19,40 +19,28 @@ var selectionInEmptyTextNode = function (selection) {
   return selection.empty && selection.$from.parent.content.size === 0;
 }
 
-var getDecorationsForSelection = function (doc, selection) {
-  // const dom = document.createElement('div')
-  // dom.style.width = 0;
-  // dom.style.display = 'inline-block';
-  // dom.style.overflow = 'visible';
-  // dom.style.position = 'relative';
-  // dom.style.cursor = 'pointer';
-  // const menuCaret = document.createElement('div');
-  // menuCaret.style.border = '1px solid black';
-  // menuCaret.style.transform = 'rotate(45deg) scale(.5)';
-  // menuCaret.style.width = '10px';
-  // menuCaret.style.height = '10px';
-  // dom.appendChild(menuCaret);
-  // menuCaret.style.position = 'absolute';
-  // menuCaret.style.left = '2px';
-  // menuCaret.style.bottom = 0;
+// A decoration should have a way to invoke onAction to update the editor view's state.
+var getDecorationsForState = function (state, onAction) {
   var menu = document.createElement('div');
-  menu.innerHTML = 'Insert: Image, HR, Table';
-  // menu.style.position = 'absolute';
-  // menu.style.left = '7px';
-  // menu.style.bottom = '-4px';
+  var button = document.createElement('button');
+  button.innerHTML = 'Insert HR';
+  button.addEventListener('mousedown', function (event) {
+    var hr = state.schema.nodes.horizontal_rule;
+    onAction(state.tr.replaceSelection(hr.create()).action());
+  });
+  menu.appendChild(button);
   menu.style.border = '1px solid black';
   menu.style.padding = '2px';
-  // menu.style.width = '200px';
-  // dom.appendChild(menu);
-  var decos = [Decoration.widget(selection.$from.pos, menu)]
-  return DecorationSet.create(doc, decos)
+  var decos = [Decoration.widget(state.selection.$from.pos, menu)]
+  return DecorationSet.create(state.doc, decos)
 }
 
-var decorationsForState = function (state) {
-  return selectionInEmptyTextNode(state.selection) ? getDecorationsForSelection(state.doc, state.selection) : DecorationSet.empty
+var decorationsForState = function (state, onAction) {
+  return selectionInEmptyTextNode(state.selection) ? getDecorationsForState(state, onAction) : DecorationSet.empty
 }
 
-function addNodeMenu() {
+function addNodeMenu(config) {
+  // config.onAction
   return new Plugin({
     key: 'add-node-menu',
 
@@ -62,7 +50,7 @@ function addNodeMenu() {
       },
       applyAction: function applyAction(action, addNodeMenuState, oldState, newState) {
         if (action.type === "selection" || action.type === "transform") {
-          return new AddNodeMenuState(decorationsForState(newState))
+          return new AddNodeMenuState(decorationsForState(newState, config.onAction))
         } else {
           return addNodeMenuState
         }
